@@ -16,6 +16,12 @@ variable "ec2_key_name" {
   #   default = "lesson1"
 }
 
+variable "ec2_count" {
+  description = "This is a description of KEY NAME"
+  type        = number
+  #   default = "1"
+}
+
 variable "ec2_default_tags" {
   description = "This is a description of DEFAULT TAGS used in describing my machine"
   type        = map(any)
