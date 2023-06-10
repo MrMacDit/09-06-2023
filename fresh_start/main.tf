@@ -8,7 +8,5 @@ resource "aws_instance" "system" {
     sudo yum install java-1.8.0-amazon-corretto-devel.x86_64 maven git -y
   EOF
 
-  tags = {
-    Name = "tolulope1"
-  }
+  tags = var.ec2_default_tags
 }
