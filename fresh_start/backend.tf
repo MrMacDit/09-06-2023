@@ -6,9 +6,14 @@ terraform {
     }
   }
 
+# Noticed that we used "var.bucket" and "var.key" to input our values? #
+# Those states are not variables per-say #
+# If you check our variable.tf file, you'd not see any reference of the creation of the variable "bucket" or "key" #
+# What simply is happening is that BUCKET doesnt take variable input. Those "var"s you see have a name they are call #
+# Remember to ask Segun how it all works #
   backend "s3" {
-    bucket = "tolus-bucket"
-    key    = "dev/terraform.tfstate"
+    bucket = var.bucket
+    key    = var.key
     region = "eu-west-1"
   }
 
