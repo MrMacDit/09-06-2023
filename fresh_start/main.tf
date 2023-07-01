@@ -1,8 +1,19 @@
+data "terraform_remote_state" "network" {
+  backend = "s3"
+
+  config = {
+    bucket = "tolus-bucket"
+    key    = "networking/terraform.tfstate"
+    region = "eu-west-1"
+  }
+}
+
 resource "aws_instance" "system" {
   ami             = var.ec2_ami
   instance_type   = var.ec2_instance_type
   key_name        = var.ec2_key_name
-  security_groups = [aws_security_group.tolulopes_security_group.name]
+  security_groups = [data.terraform_remote_state.network.outputs.aws_security_group]
+  subnet_id       = data.terraform_remote_state.network.outputs.aws_subnet
   count           = var.ec2_count
   user_data       = <<EOF
     #!/bin/bash
